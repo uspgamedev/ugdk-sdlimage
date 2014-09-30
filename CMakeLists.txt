@@ -13,33 +13,6 @@ if(MSVC)
     list(APPEND SDL2-image-sources SDL_image/version.rc)
 endif(MSVC)
 
-find_package(PNG QUIET)
-if(PNG_FOUND)
-    include_directories(${PNG_INCLUDE_DIRS})
-    set(SDLIMAGE_LIBPNG ${PNG_LIBRARIES})
-else(PNG_FOUND)
-    if(ANDROID)
-        set(PNG_SHARED ON CACHE BOOL "Build shared lib." FORCE)
-        set(PNG_STATIC OFF CACHE BOOL "Build static lib." FORCE)
-    else()
-        set(PNG_SHARED OFF CACHE BOOL "Build shared lib." FORCE)
-        set(PNG_STATIC ON CACHE BOOL "Build static lib." FORCE)
-    endif()
-    add_subdirectory(lpng163)
-    include_directories(lpng163)
-    include_directories(${CMAKE_CURRENT_BINARY_DIR}/lpng163)
-    if(ANDROID)
-        set(SDLIMAGE_LIBPNG libpng)
-    else()
-        set(SDLIMAGE_LIBPNG libpng_static)
-    endif()
-endif(PNG_FOUND)
-
-add_library(SDL2-image ${SDL2-image-sources})
-if(CMAKE_COMPILER_IS_GNUCC)
-    set_target_properties(SDL2-image PROPERTIES COMPILE_FLAGS "-fstrict-aliasing -fPIC")
-endif()
-
 target_compile_definitions(SDL2-image PRIVATE
     LOAD_TGA
     LOAD_BMP
@@ -48,8 +21,31 @@ target_compile_definitions(SDL2-image PRIVATE
     LOAD_PCX
     LOAD_PNM
     LOAD_XV
-    LOAD_PNG
     )
-target_link_libraries(     SDL2-image LINK_PUBLIC SDL2 ${SDLIMAGE_LIBPNG})
-target_include_directories(SDL2-image PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include") # TODO: add 'SYSTEM' flag when we have cmake 2.8.12
+target_link_libraries(SDL2-image LINK_PUBLIC SDL2)
+target_include_directories(SDL2-image PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/SDL_image") # TODO: add 'SYSTEM' flag when we have cmake 2.8.12
 
+
+find_package(PNG QUIET)
+if(PNG_FOUND)
+    target_compile_definitions(SDL2-image PRIVATE LOAD_PNG)
+    target_link_libraries(SDL2-image LINK_PUBLIC ${PNG_LIBRARIES})
+    target_include_directories(SDL2-image PRIVATE ${PNG_INCLUDE_DIRS})
+    
+else(PNG_FOUND)
+    #if(ANDROID)
+    #    set(PNG_SHARED ON CACHE BOOL "Build shared lib." FORCE)
+    #    set(PNG_STATIC OFF CACHE BOOL "Build static lib." FORCE)
+    #else()
+    #    set(PNG_SHARED OFF CACHE BOOL "Build shared lib." FORCE)
+    #    set(PNG_STATIC ON CACHE BOOL "Build static lib." FORCE)
+    #endif()
+    #add_subdirectory(lpng163)
+    #include_directories(lpng163)
+    #include_directories(${CMAKE_CURRENT_BINARY_DIR}/lpng163)
+    #if(ANDROID)
+    #    set(SDLIMAGE_LIBPNG libpng)
+    #else()
+    #    set(SDLIMAGE_LIBPNG libpng_static)
+    #endif()
+endif(PNG_FOUND)
