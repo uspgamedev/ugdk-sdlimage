@@ -10,8 +10,13 @@ set(SDL2-image-sources SDL_image/IMG.c
                        )
                        
 if(MSVC)
-    list(APPEND SDL2-image-sources SDL_image/version.rc)
+    list(APPEND SDL2-image-sources version.rc)
 endif(MSVC)
+
+add_library(SDL2-image ${SDL2-image-sources})
+if(CMAKE_COMPILER_IS_GNUCC)
+    set_target_properties(SDL2-image PROPERTIES COMPILE_FLAGS "-fstrict-aliasing -fPIC")
+endif()
 
 target_compile_definitions(SDL2-image PRIVATE
     LOAD_TGA
