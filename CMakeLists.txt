@@ -10,7 +10,7 @@ set(SDL2-image-sources SDL_image/IMG.c
                        )
                        
 if(MSVC)
-    list(APPEND SDL2-image-sources version.rc)
+    list(APPEND SDL2-image-sources SDL_image/version.rc)
 endif(MSVC)
 
 add_library(SDL2-image ${SDL2-image-sources})
