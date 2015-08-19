@@ -61,6 +61,8 @@
     <AppContainerApplication>true</AppContainerApplication>
     <ApplicationType>Windows Store</ApplicationType>
     <ApplicationTypeRevision>8.1</ApplicationTypeRevision>
+    <WindowsTargetPlatformVersion>10.0.10240.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformMinVersion>10.0.10240.0</WindowsTargetPlatformMinVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -120,38 +122,44 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <GenerateManifest>false</GenerateManifest>
     <IgnoreImportLibrary>false</IgnoreImportLibrary>
-    <IntDir>Objs\$(Platform)\$(Configuration)\$(MSBuildProjectName)\</IntDir>
+    <IntDir>$(SolutionDir)Objs\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
     <TargetName>SDL2_image</TargetName>
+    <OutDir>$(SolutionDir)Output\$(ProjectName)\$(Platform)\$(Configuration)\$(MSBuildProjectName)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <GenerateManifest>false</GenerateManifest>
     <IgnoreImportLibrary>false</IgnoreImportLibrary>
-    <IntDir>Objs\$(Platform)\$(Configuration)\$(MSBuildProjectName)\</IntDir>
+    <IntDir>$(SolutionDir)Objs\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
     <TargetName>SDL2_image</TargetName>
+    <OutDir>$(SolutionDir)Output\$(ProjectName)\$(Platform)\$(Configuration)\$(MSBuildProjectName)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <GenerateManifest>false</GenerateManifest>
     <IgnoreImportLibrary>false</IgnoreImportLibrary>
-    <IntDir>Objs\$(Platform)\$(Configuration)\$(MSBuildProjectName)\</IntDir>
+    <IntDir>$(SolutionDir)Objs\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
     <TargetName>SDL2_image</TargetName>
+    <OutDir>$(SolutionDir)Output\$(ProjectName)\$(Platform)\$(Configuration)\$(MSBuildProjectName)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <GenerateManifest>false</GenerateManifest>
     <IgnoreImportLibrary>false</IgnoreImportLibrary>
-    <IntDir>Objs\$(Platform)\$(Configuration)\$(MSBuildProjectName)\</IntDir>
+    <IntDir>$(SolutionDir)Objs\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
     <TargetName>SDL2_image</TargetName>
+    <OutDir>$(SolutionDir)Output\$(ProjectName)\$(Platform)\$(Configuration)\$(MSBuildProjectName)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <GenerateManifest>false</GenerateManifest>
     <IgnoreImportLibrary>false</IgnoreImportLibrary>
-    <IntDir>Objs\$(Platform)\$(Configuration)\$(MSBuildProjectName)\</IntDir>
+    <IntDir>$(SolutionDir)Objs\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
     <TargetName>SDL2_image</TargetName>
+    <OutDir>$(SolutionDir)Output\$(ProjectName)\$(Platform)\$(Configuration)\$(MSBuildProjectName)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <GenerateManifest>false</GenerateManifest>
     <IgnoreImportLibrary>false</IgnoreImportLibrary>
-    <IntDir>Objs\$(Platform)\$(Configuration)\$(MSBuildProjectName)\</IntDir>
+    <IntDir>$(SolutionDir)Objs\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
     <TargetName>SDL2_image</TargetName>
+    <OutDir>$(SolutionDir)Output\$(ProjectName)\$(Platform)\$(Configuration)\$(MSBuildProjectName)\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
