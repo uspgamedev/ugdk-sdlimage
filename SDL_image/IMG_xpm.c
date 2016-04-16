@@ -1,6 +1,6 @@
 /*
   SDL_image:  An example image loading library for use with SDL
-  Copyright (C) 1997-2013 Sam Lantinga <slouken@libsdl.org>
+  Copyright (C) 1997-2016 Sam Lantinga <slouken@libsdl.org>
 
   This software is provided 'as-is', without any express or implied
   warranty.  In no event will the authors be held liable for any damages
@@ -122,7 +122,7 @@ static struct color_hash *create_colorhash(int maxnum)
         SDL_free(hash);
         return NULL;
     }
-    memset(hash->table, 0, bytes);
+    SDL_memset(hash->table, 0, bytes);
     hash->entries = (struct hash_entry *)SDL_malloc(maxnum * sizeof(struct hash_entry));
     if (!hash->entries) {
         SDL_free(hash->table);
@@ -888,7 +888,7 @@ static int color_to_rgb(char *spec, int speclen, Uint32 *rgb)
             break;
         }
         buf[6] = '\0';
-        *rgb = strtol(buf, NULL, 16);
+        *rgb = SDL_strtol(buf, NULL, 16);
         return 1;
     } else {
         int i;
@@ -1166,6 +1166,10 @@ SDL_Surface *IMG_LoadXPM_RW(SDL_RWops *src)
 
 SDL_Surface *IMG_ReadXPMFromArray(char **xpm)
 {
+    if (!xpm) {
+        IMG_SetError("array is NULL");
+        return NULL;
+    }
     return load_xpm(xpm, NULL);
 }
 
